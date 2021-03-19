@@ -30,24 +30,43 @@ function DashboardScreen() {
         </div>
 
         <div className="w-100 mt-5">
+          <h1 className="text-center">Weather in {localStorage.getItem('location')}</h1>
+        </div>
+
+        <div className="w-100 mt-5">
           <div className="container">
             <div className="row">
               <div className="col-md-12 col-12">
                 <OwlCarousel className='' items={3} loop={false} margin={10} nav={false} autoplay>
-                  <div className="item">
-                    <h4>1</h4>
+                  <div className="item d-flex justify-content-center">
+                    <div>
+                      <h2 class="text-center">13°C</h2>
+                      <span>13.03.2021</span>
+                    </div>
                   </div>
-                  <div className="item">
-                    <h4>2</h4>
+                  <div className="item d-flex justify-content-center">
+                    <div>
+                      <h2 class="text-center">15°C</h2>
+                      <span>14.03.2021</span>
+                    </div>
                   </div>
-                  <div className="item">
-                    <h4>3</h4>
+                  <div className="item d-flex justify-content-center">
+                    <div>
+                      <h2 class="text-center">18°C</h2>
+                      <span>15.03.2021</span>
+                    </div>
                   </div>
-                  <div className="item">
-                    <h4>4</h4>
+                  <div className="item d-flex justify-content-center">
+                    <div>
+                      <h2 class="text-center">11°C</h2>
+                      <span>16.03.2021</span>
+                    </div>
                   </div>
-                  <div className="item">
-                    <h4>5</h4>
+                  <div className="item d-flex justify-content-center">
+                    <div>
+                      <h2 class="text-center">25°C</h2>
+                      <span>17.03.2021</span>
+                    </div>
                   </div>
                 </OwlCarousel>
               </div>

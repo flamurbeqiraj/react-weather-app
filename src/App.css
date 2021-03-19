@@ -48,6 +48,6 @@ h4.identify-title {
   background-color: blue;
 }
 .item {
-  background-color: red;
-  height: 85px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px 0;
 }
