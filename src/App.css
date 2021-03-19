@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-* {
+
+html, body, #root {
   box-sizing: border-box;
   height: 100%;
   width: 100%;
@@ -10,15 +11,43 @@ h4.identify-title {
   text-align: center;
 }
 .App {
-  height: 100wh;
+  height: 100%;
   background: lightgrey;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.Dashboard {
+  background: url(https://i.pinimg.com/originals/7e/41/c4/7e41c473923b20c7fdf389fbefb5c511.jpg) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 .identifyBox {
   background-color: white;
   height: auto;
   width: 300px;
   padding: 20px;
+}
+.dashboardBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.daily {
+  font-size: 80px;
+  font-weight: 200;
+}
+.underInfo {
+  font-weight: 900;
+}
+.rect {
+  background-color: blue;
+}
+.item {
+  background-color: red;
+  height: 85px;
 }

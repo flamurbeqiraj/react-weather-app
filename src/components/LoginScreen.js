@@ -6,6 +6,10 @@ class LoginScreen extends Component {
     super(props);
     this.state = {username: '', location: ''}
 
+    if (localStorage.getItem('name') !== null) {
+      window.location.href = '/dashboard'
+    }
+
     this.handleUsername = this.handleUsername.bind(this)
     this.handleLocation = this.handleLocation.bind(this)
     this.handleLogin    = this.handleLogin.bind(this)
@@ -22,6 +26,7 @@ class LoginScreen extends Component {
   handleLogin() {
     localStorage.setItem('name', this.state.username)
     localStorage.setItem('location', this.state.location)
+    window.location.href = '/dashboard'
   }
 
   render() {
@@ -29,9 +34,9 @@ class LoginScreen extends Component {
       <div className="App">
         <div className="identifyBox">
           <h4 className="identify-title">IDENTIFY YOURSELF</h4>
-          <input type="text" value={this.state.username} onChange={this.handleUsername} placeholder="Your name" />
-          <input type="text" value={this.state.location} onChange={this.handleLocation} placeholder="Your location" />
-          <button onClick={this.handleLogin}>LOGIN</button>
+          <input type="text" className="form-control" value={this.state.username} onChange={this.handleUsername} placeholder="Your name" />
+          <input type="text" className="form-control" value={this.state.location} onChange={this.handleLocation} placeholder="Your location" />
+          <button className="btn btn-success w-100" onClick={this.handleLogin}>LOGIN</button>
         </div>
       </div>
     );
