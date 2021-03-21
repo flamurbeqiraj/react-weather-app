@@ -6,8 +6,11 @@ class LoginScreen extends Component {
     super(props);
     this.state = {username: '', location: ''}
 
-    if (localStorage.getItem('name') !== null) {
+    if (localStorage.getItem('name') !== null && localStorage.getItem('location') !== null) {
       window.location.href = '/dashboard'
+    }
+
+    if (localStorage.getItem('name') !== null) {
     }
 
     this.handleUsername = this.handleUsername.bind(this)
