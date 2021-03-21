@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import '../App.css';
 
-import OwlCarousel from 'react-owl-carousel'
+import OwlCarousel from 'react-owl-carousel' //Using Owl for 5 day presentation
 import 'owl.carousel/dist/assets/owl.carousel.min.css'
 import 'owl.carousel/dist/assets/owl.theme.default.min.css'
-import Swal from 'sweetalert2'
+
+import Swal from 'sweetalert2' //Toasting in a fancy way
 import withReactContent from 'sweetalert2-react-content'
-import moment from 'moment'
-import { CircularProgress } from '@material-ui/core';
+
+import moment from 'moment' //Using moment to format dates
+
+import { CircularProgress } from '@material-ui/core'; //Getting spinner
 
 const MySwal = withReactContent(Swal)
 
@@ -15,32 +18,36 @@ class DashboardScreen extends Component {
   constructor(props) {
     super(props)
 
+    //Initialising location from localStorage
     this.state = { location: localStorage.getItem('location') }
 
+    //Declaring methods
     this.fetchNewData = this.fetchNewData.bind(this);
     this.reLogin = this.reLogin.bind(this);
 
+    //Validation
     if (localStorage.getItem('name') === null || localStorage.getItem('location') === null) {
       window.location.href = '/'
     } else {
       if (localStorage.getItem('fetchedAPI') === null) {
         this.state = { weather: null };
       } else {
-        this.state = { weather: JSON.parse(localStorage.getItem('fetchedAPI')) };
+        this.state = { weather: JSON.parse(localStorage.getItem('fetchedAPI')) }; //Passing API Response to the state
       }
     }
   }
 
+  //Offering the user to change the inputs
   reLogin() {
     localStorage.removeItem('location')
     localStorage.removeItem('fetchedAPI')
     window.location.href = '/'
   }
 
+  //Getting new data from the API Url, on reload it will just use the old data
   fetchNewData() {
     localStorage.removeItem('fetchedAPI')
     this.setState({ weather: null })
-
     fetch("http://api.openweathermap.org/data/2.5/forecast?q="+localStorage.getItem('location')+"&units=metric&appid=7bb34b62ee0b66660c23a77d7ad86eb1")
     .then(res => res.json())
     .then(json => {
@@ -83,7 +90,9 @@ class DashboardScreen extends Component {
           this.setState({ weather: JSON.parse(localStorage.getItem('fetchedAPI')) })
         } else {
           MySwal.fire({
-            title: <p>Wrong location</p>
+            title: <p>Wrong location</p>,
+            text: 'Please write the name of the city correctly',
+            icon: 'warn'
           }).then(() => {
             localStorage.removeItem('location')
             window.location.href = '/'

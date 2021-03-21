@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import './App.css';
 import {Route, BrowserRouter as Router} from  "react-router-dom"
-// import OwlCarousel from 'react-owl-carousel'
-// import 'owl.carousel/dist/assets/owl.carousel.min.css'
-// import 'owl.carousel/dist/assets/owl.theme.default.min.css'
 import LoginScreen from './components/LoginScreen'
 import DashboardScreen from './components/DashboardScreen'
 
@@ -11,8 +8,9 @@ class App extends Component {
   render() {
     return (
       <Router>
+        {/* Used 'exact' keyword to match the exact path/route */}
         <Route path="/" exact component={LoginScreen} />
-        <Route path="/dashboard" component={DashboardScreen} />
+        <Route path="/dashboard" exact component={DashboardScreen} />
       </Router>
     )
   }
