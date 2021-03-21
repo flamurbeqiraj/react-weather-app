@@ -46,6 +46,7 @@ class DashboardScreen extends Component {
     .then(json => {
       if (json.cod === '200') {
         this.setState({ weather: JSON.parse(localStorage.getItem('fetchedAPI')) })
+        localStorage.setItem('today', Math.round(json.list[0].main.temp))
         var temporaryArray = [];
         for (let i = 0; i < json.list.length; i += 8) {
           temporaryArray.push(json.list[i])
@@ -73,6 +74,8 @@ class DashboardScreen extends Component {
       .then(json => {
         if (json.cod === "200") {
           var temporaryArray = [];
+          // localStorage.setItem('today', Math.round(json.list[0].main.temp))
+          localStorage.setItem('today', Math.round(json.list[0].main.temp))
           for (let i = 0; i < json.list.length; i += 8) {
             temporaryArray.push(json.list[i])
           }
@@ -99,7 +102,7 @@ class DashboardScreen extends Component {
               <CircularProgress />
             </div>
             <div className="">
-              <h1>LOADING</h1>
+              <h2>LOADING</h2>
             </div>
           </div>
         </div>
@@ -108,25 +111,24 @@ class DashboardScreen extends Component {
       return (
         <div className="Dashboard d-flex justify-content-center align-items-center">
           <div className="w-100">
-            <div className="w-100 d-flex justify-content-center">
-              <div className="dashboardBox">
-                <div>
-                  <div>
-                    <h2 className="text-center">Hello, {localStorage.getItem('name')}</h2>
-                  </div>
-                  <div>
-                    <h1 className="daily text-center mb-0">30°C</h1>
-                  </div>
-                  <div>
-                    <h1 className="underInfo text-center">Today</h1>
+            <div className="container">
+              <div className="row">
+                <div className="col-12">
+                  <div className="dashboardBox p-4">
+                    <div>
+                      <div>
+                        <h3 className="text-center">Hello, {localStorage.getItem('name')}</h3>
+                      </div>
+                      <div>
+                        <h1 className="daily text-center mb-0">{localStorage.getItem('today')}°C</h1>
+                      </div>
+                      <div>
+                        <h2 className="underInfo text-center mb-0">Now in {localStorage.getItem('location')} <button className="btn btn-danger btn-sm" onClick={this.reLogin}>X</button></h2>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="w-100 mt-5">
-              <h1 className="text-center">Weather in</h1>
-              <h1 className="text-center">{localStorage.getItem('location')} <button className="btn btn-danger btn-sm" onClick={this.reLogin}>X</button></h1>
             </div>
 
             <div className="w-100 mt-5">
@@ -153,7 +155,7 @@ class DashboardScreen extends Component {
               <div className="container">
                 <div className="row">
                   <div className="col-12 text-center">
-                    <button className="btn btn-primary btn-sm" onClick={this.fetchNewData}>FETCH DATA</button>
+                    <button className="btn btn-primary" onClick={this.fetchNewData}>UPDATE WEATHER</button>
                   </div>
                 </div>
               </div>

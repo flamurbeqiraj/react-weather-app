@@ -33,8 +33,6 @@ h4.identify-title {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px;
-  width: 300px;
   background-color: rgba(255, 255, 255, 0.5);
 }
 .daily {
