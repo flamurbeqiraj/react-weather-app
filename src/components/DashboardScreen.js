@@ -7,6 +7,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.min.css'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import moment from 'moment'
+import { CircularProgress } from '@material-ui/core';
 
 const MySwal = withReactContent(Swal)
 
@@ -40,33 +41,29 @@ class DashboardScreen extends Component {
     localStorage.removeItem('fetchedAPI')
     this.setState({ weather: null })
 
-    // fetch("http://api.openweathermap.org/data/2.5/forecast?q="+localStorage.getItem('location')+"&units=metric&appid=7bb34b62ee0b66660c23a77d7ad86eb1")
-    // .then(res => res.json())
-    // .then(json => {
-    //   if (json.cod === '200') {
-    //     this.setState({ weather: JSON.parse(localStorage.getItem('fetchedAPI')) })
-    //     var temporaryArray = [];
-    //     for (let i = 0; i < json.list.length; i += 8) {
-    //       temporaryArray.push(json.list[i])
-    //     }
-    //     localStorage.setItem('fetchedAPI', JSON.stringify(temporaryArray))
-    //     this.setState({
-    //       location: localStorage.getItem('location'),
-    //       weather: JSON.parse(localStorage.getItem('fetchedAPI'))
-    //     })
-    //   } else {
-    //     MySwal.fire({
-    //       title: <p>Wrong location</p>
-    //     }).then(() => {
-    //       localStorage.removeItem('location')
-    //       window.location.href = '/'
-    //     })
-    //   }
-    // })
-  }
-
-  componentDidUpdate() {
-    console.log("Did update")
+    fetch("http://api.openweathermap.org/data/2.5/forecast?q="+localStorage.getItem('location')+"&units=metric&appid=7bb34b62ee0b66660c23a77d7ad86eb1")
+    .then(res => res.json())
+    .then(json => {
+      if (json.cod === '200') {
+        this.setState({ weather: JSON.parse(localStorage.getItem('fetchedAPI')) })
+        var temporaryArray = [];
+        for (let i = 0; i < json.list.length; i += 8) {
+          temporaryArray.push(json.list[i])
+        }
+        localStorage.setItem('fetchedAPI', JSON.stringify(temporaryArray))
+        this.setState({
+          location: localStorage.getItem('location'),
+          weather: JSON.parse(localStorage.getItem('fetchedAPI'))
+        })
+      } else {
+        MySwal.fire({
+          title: <p>Wrong location</p>
+        }).then(() => {
+          localStorage.removeItem('location')
+          window.location.href = '/'
+        })
+      }
+    })
   }
 
   componentDidMount() {
@@ -97,7 +94,14 @@ class DashboardScreen extends Component {
     if (this.state.weather === null) {
       return (
         <div className="h-100 d-flex justify-content-center align-items-center">
-          <h1>Loading</h1>
+          <div>
+            <div className="d-flex justify-content-center mb-4">
+              <CircularProgress />
+            </div>
+            <div className="">
+              <h1>LOADING</h1>
+            </div>
+          </div>
         </div>
       )
     } else {
